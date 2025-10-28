@@ -9,14 +9,14 @@ export async function generateStaticParams() {
   ];
 }
 
-// 1. TIPO RENOMBRADO para evitar colisiones en Vercel
-type TemplatePageProps = {
+// 1. HEMOS ELIMINADO CUALQUIER "type" CON NOMBRE.
+// 2. HEMOS DEFINIDO EL TIPO "EN LÍNEA" DIRECTAMENTE AQUÍ.
+export default function TemplatePage({
+  params
+}: {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
-};
-
-// 2. FIRMA DEL COMPONENTE ACTUALIZADA para usar el nuevo nombre
-export default function TemplatePage({ params }: TemplatePageProps) {
+}) {
   
   const slug = params.slug;
 
@@ -170,7 +170,7 @@ export default function TemplatePage({ params }: TemplatePageProps) {
                     <div className="text-xs text-gray-600">Proyectos</div>
                   </div>
                   <div className="bg-white/50 rounded-lg p-3">
-                    <div className="text-lg font-bold text-purple-600">5S★</div>
+                    <div className="text-lg font-bold text-purple-600">5★</div>
                     <div className="text-xs text-gray-600">Rating</div>
                   </div>
                   <div className="bg-white/50 rounded-lg p-3">
