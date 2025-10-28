@@ -11,18 +11,17 @@ export async function generateStaticParams() {
 }
 
 // 2. DEFINIMOS UNA INTERFACE SEPARADA (como sugiere Netlify)
-//    Usamos un nombre único 'TemplatePageProps' para evitar colisiones.
-//    Incluimos 'searchParams' aunque no lo uses, porque Next.js lo pasa.
+//    En Next.js 15, params es una Promise
 interface TemplatePageProps {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 // 3. USAMOS LA INTERFACE y hacemos el componente ASYNC (como sugiere Netlify)
 export default async function TemplatePage({ params }: TemplatePageProps) {
   
-  // 4. Se usa 'params' directamente (SIN Promise, SIN await)
-  const slug = params.slug;
+  // 4. Ahora sí necesitamos await porque params es una Promise
+  const { slug } = await params;
 
   // Configuraciones específicas para cada plantilla
   const templateConfigs = {
