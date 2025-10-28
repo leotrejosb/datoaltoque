@@ -154,9 +154,6 @@ export default function Pricing() {
                   {plan.ctaText}
                 </a>
               </div>
-
-              {/* Decoración inferior */}
-              <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-b-3xl"></div>
             </div>
           ))}
         </div>
