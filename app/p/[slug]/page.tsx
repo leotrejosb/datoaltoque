@@ -1,4 +1,5 @@
-import { User, Globe, Linkedin, Github, Download, ArrowLeft, Mail, Phone, MapPin, Calendar, Star, Heart, Camera, Music, Briefcase, Award } from 'lucide-react';
+// 1. Importaciones limpiadas (se quitaron 'User' y 'Github' que no se usaban)
+import { Globe, Linkedin, Download, ArrowLeft, Mail, Phone, MapPin, Calendar, Star, Heart, Camera, Music, Briefcase, Award } from 'lucide-react';
 import Link from 'next/link';
 
 export async function generateStaticParams() {
@@ -9,18 +10,16 @@ export async function generateStaticParams() {
   ];
 }
 
-// 1. TIPO MODIFICADO para intentar usar Promise (NO FUNCIONARÁ EN RUNTIME)
-type TemplatePageProps = {
-  params: Promise<{ slug: string }>; // <--- Modificado a Promise
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-// 2. Componente modificado para ser ASYNC y poder usar AWAIT
-export default async function TemplatePage({ params, searchParams }: TemplatePageProps) {
+// 2. TIPO DEFINIDO "EN LÍNEA" (inline) - Esta es la forma más robusta.
+//    Se eliminó 'searchParams' de aquí porque no se usaba (soluciona el Warning).
+export default function TemplatePage({
+  params
+}: {
+  params: { slug: string };
+}) {
   
-  // 3. AHORA NECESITAMOS USAR 'await' para obtener los params
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+  // 3. Se usa 'params' directamente (se quitó 'async', 'await' y 'Promise')
+  const slug = params.slug;
 
   // Configuraciones específicas para cada plantilla
   const templateConfigs = {
