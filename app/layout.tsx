@@ -1,18 +1,13 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-// Asegúrate de que estas rutas sean correctas
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'datoaltoque | Perfiles Digitales Profesionales',
-  description: 'Eleva tu networking con soluciones digitales para equipos y profesionales.',
-  keywords: 'perfiles digitales, networking profesional, soluciones B2B, tarjetas digitales',
-  authors: [{ name: 'datoaltoque' }],
-  viewport: 'width=device-width, initial-scale=1',
+  // ... (tus metadatos)
 }
 
 export default function RootLayout({
@@ -22,13 +17,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={inter.variable}>
-      {/* Estas clases ahora funcionarán gracias al Paso 1 */}
-      <body className="bg-white text-text-primary font-sans">
+      {/* 1. Añadimos flex flex-col y min-h-screen al <body> */}
+      <body className="bg-white text-text-primary font-sans flex flex-col min-h-screen">
         <Navbar />
-        {/* Aplicamos las clases del contenedor aquí */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* 2. Añadimos flex-grow a <main> para que "empuje" al footer */}
+        <main className="flex-grow">
           {children}
         </main>
+        
         <Footer />
       </body>
     </html>
