@@ -1,4 +1,4 @@
-// 1. Importaciones limpiadas (se quitaron 'User' y 'Github' que no se usaban)
+// 1. Importaciones limpiadas
 import { Globe, Linkedin, Download, ArrowLeft, Mail, Phone, MapPin, Calendar, Star, Heart, Camera, Music, Briefcase, Award } from 'lucide-react';
 import Link from 'next/link';
 
@@ -10,16 +10,18 @@ export async function generateStaticParams() {
   ];
 }
 
-// 2. TIPO DEFINIDO "EN LÍNEA" (inline) - Esta es la forma más robusta.
-//    Mantenemos searchParams aquí para satisfacer el tipo interno de Vercel.
-export default function TemplatePage({
-  params
-}: {
+// 2. DEFINIMOS UNA INTERFACE SEPARADA (como sugiere Netlify)
+//    Usamos un nombre único 'TemplatePageProps' para evitar colisiones.
+//    Incluimos 'searchParams' aunque no lo uses, porque Next.js lo pasa.
+interface TemplatePageProps {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+// 3. USAMOS LA INTERFACE y hacemos el componente ASYNC (como sugiere Netlify)
+export default async function TemplatePage({ params }: TemplatePageProps) {
   
-  // 3. Se usa 'params' directamente (se quitó 'async', 'await' y 'Promise')
+  // 4. Se usa 'params' directamente (SIN Promise, SIN await)
   const slug = params.slug;
 
   // Configuraciones específicas para cada plantilla
@@ -161,7 +163,6 @@ export default function TemplatePage({
                     <button.icon className="w-5 h-5 mr-3" />
                     {button.text}
                   </button> 
-                  
                 ))}
               </div>
 
