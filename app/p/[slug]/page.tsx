@@ -11,11 +11,12 @@ export async function generateStaticParams() {
 }
 
 // 2. TIPO DEFINIDO "EN LÍNEA" (inline) - Esta es la forma más robusta.
-//    Se eliminó 'searchParams' de aquí porque no se usaba (soluciona el Warning).
+//    Mantenemos searchParams aquí para satisfacer el tipo interno de Vercel.
 export default function TemplatePage({
   params
 }: {
   params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
   
   // 3. Se usa 'params' directamente (se quitó 'async', 'await' y 'Promise')
@@ -159,7 +160,8 @@ export default function TemplatePage({
                   >
                     <button.icon className="w-5 h-5 mr-3" />
                     {button.text}
-                  </button>
+                  </button> 
+                  
                 ))}
               </div>
 
