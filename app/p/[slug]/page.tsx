@@ -9,16 +9,18 @@ export async function generateStaticParams() {
   ];
 }
 
-// 1. HEMOS ELIMINADO CUALQUIER "type" CON NOMBRE.
-// 2. HEMOS DEFINIDO EL TIPO "EN LÍNEA" DIRECTAMENTE AQUÍ.
-export default function TemplatePage({
-  params
-}: {
-  params: { slug: string };
+// 1. TIPO MODIFICADO para intentar usar Promise (NO FUNCIONARÁ EN RUNTIME)
+type TemplatePageProps = {
+  params: Promise<{ slug: string }>; // <--- Modificado a Promise
   searchParams: { [key: string]: string | string[] | undefined };
-}) {
+};
+
+// 2. Componente modificado para ser ASYNC y poder usar AWAIT
+export default async function TemplatePage({ params, searchParams }: TemplatePageProps) {
   
-  const slug = params.slug;
+  // 3. AHORA NECESITAMOS USAR 'await' para obtener los params
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
 
   // Configuraciones específicas para cada plantilla
   const templateConfigs = {
