@@ -1,9 +1,5 @@
-// 1. 'use client' SE HA ELIMINADO
-
 import { User, Globe, Linkedin, Github, Download, ArrowLeft, Mail, Phone, MapPin, Calendar, Star, Heart, Camera, Music, Briefcase, Award } from 'lucide-react';
 import Link from 'next/link';
-
-// 2. 'useParams' SE HA ELIMINADO de la importación
 
 export async function generateStaticParams() {
   return [
@@ -13,10 +9,15 @@ export async function generateStaticParams() {
   ];
 }
 
-// 3. El componente AHORA ACEPTA { params } COMO PROP
-export default function TemplatePage({ params }: { params: { slug: string } }) {
+// 1. TIPO AÑADIDO PARA SOLUCIONAR EL ERROR DE VERCEL
+type PageProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+// 2. FIRMA DEL COMPONENTE ACTUALIZADA PARA USAR 'PageProps'
+export default function TemplatePage({ params }: PageProps) {
   
-  // 4. Obtenemos el slug DIRECTAMENTE DE LAS PROPS
   const slug = params.slug;
 
   // Configuraciones específicas para cada plantilla
@@ -206,7 +207,7 @@ export default function TemplatePage({ params }: { params: { slug: string } }) {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="httpsall://wa.me/51987654321" // RECUERDA CAMBIAR ESTE NÚMERO
+              href="https://wa.me/51987654321" // RECUERDA CAMBIAR ESTE NÚMERO
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
