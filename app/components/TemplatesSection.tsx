@@ -59,12 +59,12 @@ export default function TemplatesSection() {
         </div>
 
         {/* Grid de plantillas */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-10 items-stretch">
           {templates.map((template, index) => (
             <div
               key={index}
               className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl 
-                         transition-all duration-500 transform hover:scale-105 border border-gray-100"
+                         transition-all duration-500 transform hover:scale-105 border border-gray-100 flex flex-col"
             >
               {/* Preview visual */}
               <div className={`h-48 bg-gradient-to-br ${template.bgColor} relative overflow-hidden`}>
@@ -83,7 +83,7 @@ export default function TemplatesSection() {
               </div>
 
               {/* Contenido */}
-              <div className="p-8">
+              <div className="p-8 flex flex-col flex-grow">
                 <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 
                               transition-colors">
                   {template.name}
@@ -96,6 +96,7 @@ export default function TemplatesSection() {
                 </p>
                 
                 {/* Botón de vista previa */}
+                <div className="mt-auto pt-6">
                 <Link
                   href={`/p/${template.slug}`}
                   className={`block w-full bg-gradient-to-r ${template.color} 
@@ -105,6 +106,7 @@ export default function TemplatesSection() {
                 >
                   Ver Vista Previa
                 </Link>
+                </div>
               </div>
 
               {/* Overlay hover */}
